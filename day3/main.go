@@ -50,7 +50,6 @@ func part1() int {
 
 func part2() int {
 	sum := 0
-
 	lines := strings.Split(string(input()), "\n")
 	priorityRange := 52
 	for x := 0; x < len(lines)-3; x += 3 {
