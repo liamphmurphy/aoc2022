@@ -9,7 +9,7 @@ import (
 
 func main() {
 	fmt.Println("part1:", part1())
-	//fmt.Println("part2:", part2())
+	fmt.Println("part2:", part2())
 }
 
 func input() []byte {
@@ -42,6 +42,44 @@ func part1() int {
 				sum += priority(split[i])
 				delete(shared, split[i])
 			}
+		}
+	}
+
+	return sum
+}
+
+func part2() int {
+	sum := 0
+
+	lines := strings.Split(string(input()), "\n")
+	priorityRange := 52
+	for x := 0; x < len(lines)-3; x += 3 {
+		m1 := make(map[int]int, priorityRange)
+		m2 := make(map[int]int, priorityRange)
+		m3 := make(map[int]int, priorityRange)
+		for _, k := range lines[x] {
+			m1[priority(string(k))]++
+		}
+
+		for _, k := range lines[x+1] {
+			m2[priority(string(k))]++
+		}
+		for _, k := range lines[x+2] {
+			m3[priority(string(k))]++
+		}
+
+		for i := 0; i <= priorityRange; i++ {
+			if _, ok := m2[i]; !ok {
+				delete(m1, i)
+			}
+
+			if _, ok := m3[i]; !ok {
+				delete(m1, i)
+			}
+		}
+
+		for k := range m1 {
+			sum += k
 		}
 	}
 
