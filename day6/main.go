@@ -7,8 +7,8 @@ import (
 )
 
 func main() {
-	fmt.Println("part1:", part1())
-	//fmt.Println("part2:", process(true))
+	fmt.Println("part1:", process(4))
+	fmt.Println("part2:", process(14))
 }
 
 func input() []byte {
@@ -20,10 +20,10 @@ func input() []byte {
 	return input
 }
 
-func part1() int {
+func process(end int) int {
 	line := input()
 	start := 0
-	for i := 4; i < len(line)-1; i++ {
+	for i := end; i < len(line)-1; i++ {
 		if unique(line[start : i+1]) {
 			return i
 		}
